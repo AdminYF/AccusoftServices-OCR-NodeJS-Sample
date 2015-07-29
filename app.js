@@ -13,7 +13,7 @@ function execute(args) {
     if (error) {
       console.log(error);
     } else {
-      console.log('Sucessfully posted ' + args.inputFilePath + ' to work file API.');
+      console.log('Sucessfully posted document,"' + args.inputFilePath + '" to the work file API.');
       postDocumentTextReaders (data);
     }
   });
@@ -25,7 +25,7 @@ function postDocumentTextReaders (data) {
     if (error) {
       console.log(error);
     } else {
-      console.log('Sucessfully posted ' + args.inputFilePath + ' to document text readers API.');
+      console.log('Sucessfully posted the document to the text readers API.');
       getDocument(data);
     }
   });
@@ -37,6 +37,7 @@ function getDocument (data) {
       console.log(error);
     } else {
       if (data) {
+        console.log('Sucessfully retrieved the document from the text readers API.');
         getPdf (data);
       }
     }

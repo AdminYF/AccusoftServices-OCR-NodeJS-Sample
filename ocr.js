@@ -31,15 +31,16 @@ OcrService.prototype.postWorkFile = function (inputFilePath, callback) {
   var chunks = [];
   fs.createReadStream(inputFilePath)
   .pipe(request.post(options)
-    .on('data', function (chunk) {
-      chunks.push(chunk);
-    })
-    .on('end', function () {
-      callback(null, JSON.parse(chunks.join('')));
-    })
-    .on('response', function (response) {
-      if (response.statusCode != 200) {
+    .on('response', function (res) {
+      if (res.statusCode != 200) {
         callback(new Error('Failure to post workfile'));
+      } else {
+        res.on('data', function (chunk) {
+          chunks.push(chunk);
+        })
+        res.on('end', function () {
+          callback(null, JSON.parse(chunks.join('')));
+        })
       }
     })
   );
@@ -82,6 +83,9 @@ OcrService.prototype.postDocumentTextReaders = function (fileId, destFormat, cal
         res.on('end', function () {
           callback(null, JSON.parse(chunks.join('')));
         });
+        res.on('error', function (error) {
+            callback(error);
+        })
       }
     });
   req.write(postData);
@@ -137,8 +141,13 @@ OcrService.prototype.getDocument = function(recurseCnt, outputFilePath, destForm
             } else if (destFormat === "pdf") {
               callback(null, chunks);
             }
+          } else if(chunks.state === "error") {
+              callback(new Error('Failure to OCR document'));
           }
         });
+        res.on('error', function (error) {
+            callback(error);
+        })
       }
     });
   req.end();
@@ -158,11 +167,11 @@ OcrService.prototype.getPdf = function (outputFilePath, workfileId, affinityToke
   };
 
   request(options)
-    .on('response', function (response) {
-      if (response.statusCode != 200) {
+    .on('response', function (res) {
+      if (res.statusCode != 200) {
         callback(new Error('Failure getting PDF'));
       } else {
-        response.pipe(fs.createWriteStream(outputFilePath))
+        res.pipe(fs.createWriteStream(outputFilePath))
         .on('error', function (error) {
           callback(error);
         })
