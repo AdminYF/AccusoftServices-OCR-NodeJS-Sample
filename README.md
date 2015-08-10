@@ -6,7 +6,7 @@ Build OCR capabilities to your web application quickly using the Accusoft Cloud 
 Download the package and type
 
 	npm install
-Open config.json and replace everything within the quotes including the curly braces with a valid [api key](http://www.accusoft.com/portal/ "Get your api key") obtained for **free** from accusoft.com.
+Open **config.json** and replace everything within the quotes including the curly braces with a valid [api key](http://www.accusoft.com/portal/ "Get your api key") obtained for **free** from accusoft.com.
 
 	{
 	  "apiKey": "{{ valid key here }}"
