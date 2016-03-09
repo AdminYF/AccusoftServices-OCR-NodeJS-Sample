@@ -1,7 +1,7 @@
 # nodejs ocr example code
-The following is sample code for scanning documents or images for text within JPG, TIF, PNG, or BMP formats using node.js in conjunction with the Accusoft Cloud Services API. It returns the extracted content into either a searchable PDF or text file.
+The following is sample code for scanning documents or images for text within JPG, TIF, PNG, or BMP formats using node.js in conjunction with the Accusoft Services API. It returns the extracted content into either a searchable PDF or text file.
 ###Overview
-Build OCR capabilities to your web application quickly using the Accusoft Cloud Services OCR API. Support for scanning documents and images for text within JPG, TIF, PNG, or BMP formats. If you are ready to build OCR into your own application then take a moment to learn more about the [Accusoft Cloud Services OCR API here](https://www.accusoft.com/products/accusoft-cloud-services/overview/).
+Build OCR capabilities to your web application quickly using the Accusoft Services OCR API. Support for scanning documents and images for text within JPG, TIF, PNG, or BMP formats. If you are ready to build OCR into your own application then take a moment to learn more about the [Accusoft Services OCR API here](https://www.accusoft.com/products/accusoft-cloud-services/overview/).
 ###Installation
 Download the package and type
 
@@ -48,7 +48,7 @@ This is a fully functioning example to get you started using the ocr services. T
 
 ####Creating a Workfile
 The purpose of a WorkFile is for temporary storage of files on Accusoft servers so they can be shared by various back-end processes that need to act on it.
-The parameter (**inputFilePath**) is sent via a POST to the Accusoft Cloud services api. The api key (**config.apiKey**) is sent as a header. The response will contain the (**fileId** and **affinityToken**) within a JSON object. These values will be needed for calls to the DocumentTextReaders and WorkFile APIs. For more information, see the [OCR work files documentation](http://help.accusoft.com/SAAS/pcc-for-acs/webframe.html#Work%20Files.html).
+The parameter (**inputFilePath**) is sent via a POST to the Accusoft Services api. The api key (**config.apiKey**) is sent as a header. The response will contain the (**fileId** and **affinityToken**) within a JSON object. These values will be needed for calls to the DocumentTextReaders and WorkFile APIs. For more information, see the [OCR work files documentation](http://help.accusoft.com/SAAS/pcc-for-acs/webframe.html#Work%20Files.html).
 ```
 OcrService.prototype.postWorkFile = function (inputFilePath, callback) {
   if (arguments.length < 2) {
@@ -81,7 +81,7 @@ OcrService.prototype.postWorkFile = function (inputFilePath, callback) {
 };
 ```
 ####Reading text
-The document text reader API allows you to read text from a raster document, producing either a text file, searchable PDF or box file. The contents of a JSON object containing the workfile ID (**fileId**) and describing the operation to perform (**destFormat**) are sent via POST to the Accusoft Cloud Services api with the api key (**config.apiKey**) sent as a header. A successful response will include a unique (**processId**) which identifies this documentTextReader. You will use this processId in subsequent GET calls to get the state and final results of the OCR operation. For more information, see the [OCR document text readers documentation](http://help.accusoft.com/SAAS/pcc-for-acs/webframe.html#Full-Page%20OCR.html).
+The document text reader API allows you to read text from a raster document, producing either a text file, searchable PDF or box file. The contents of a JSON object containing the workfile ID (**fileId**) and describing the operation to perform (**destFormat**) are sent via POST to the Accusoft Services api with the api key (**config.apiKey**) sent as a header. A successful response will include a unique (**processId**) which identifies this documentTextReader. You will use this processId in subsequent GET calls to get the state and final results of the OCR operation. For more information, see the [OCR document text readers documentation](http://help.accusoft.com/SAAS/pcc-for-acs/webframe.html#Full-Page%20OCR.html).
 ```
 OcrService.prototype.postDocumentTextReaders = function (fileId, destFormat, callback) {
   if (arguments.length < 3) {
@@ -186,7 +186,7 @@ OcrService.prototype.getDocument = function(recurseCnt, outputFilePath, destForm
 };
 ```
 ####Downloading PDF output
-Gets the data associated with an existing WorkFile. The parameter (**workfileId**) is sent via a GET to the Accusoft Cloud services api. The api key (**config.apiKey**) and (**affinityToken**) are sent as a header. The response will contain binary data the will be be written out to (**outputFilePath**). For more information, see the [OCR write files documentation](http://help.accusoft.com/SAAS/pcc-for-acs/webframe.html#Work%20Files.html).
+Gets the data associated with an existing WorkFile. The parameter (**workfileId**) is sent via a GET to the Accusoft Services api. The api key (**config.apiKey**) and (**affinityToken**) are sent as a header. The response will contain binary data the will be be written out to (**outputFilePath**). For more information, see the [OCR write files documentation](http://help.accusoft.com/SAAS/pcc-for-acs/webframe.html#Work%20Files.html).
 ```
 OcrService.prototype.getPdf = function (outputFilePath, workfileId, affinityToken, callback) {
   if (arguments.length < 4) {
@@ -218,4 +218,3 @@ OcrService.prototype.getPdf = function (outputFilePath, workfileId, affinityToke
 ```
 ##Support
 If you have questions, please visit our online [help center](https://accusofthelp.zendesk.com/hc/en-us).
-
